@@ -3,19 +3,18 @@ const enterButton = document.getElementById("confirmLetter");
 const guessedLetterInput = document.getElementById("guessedLetter"); // INPUT
 const gamingArea = document.getElementById("gamingArea") // Visar divar
 const wrongLetter = document.getElementById("wrongLetter")
+const triedAlready = document.getElementById("triedAlready")
+const unlockedPic = document.getElementById("unlocked")
 
-let password = "bonollett"
+let password = "aa"
 let arrayOfDiv = createGameField()
 
 function createGameField () {
     let boxes = []
     for (let l of password){
         const div = document.createElement("div")
-        div.style.border = "2px solid black"
-        div.style.padding = "3px"
-        div.style.height = "20px"
-        div.style.width = "20px"
         div.textContent = ""
+        div.classList.add("box")
         boxes.push(div)
         gamingArea.appendChild(div)
     }
@@ -32,14 +31,22 @@ function checkInput(inputValue) {
 
 function checkLetter(letter) {
 
+    triedAlready.textContent = ""
+
+    if (wrongLetter.textContent.includes(letter.toUpperCase())){
+        triedAlready.textContent = `Du har redan testat ${letter.toUpperCase()}`
+        return
+    }
+
     if (!password.includes(letter)){
-        wrongLetter.textContent += letter
+        wrongLetter.textContent += letter.toUpperCase()
     }
     
 
     for (let i = 0; i < password.length; i++) {
         if (password[i] === letter) {
-            arrayOfDiv[i].textContent = letter;
+            arrayOfDiv[i].textContent = letter.toUpperCase();
+            arrayOfDiv[i].classList.add("correct")
         }
     }
 
@@ -54,18 +61,18 @@ enterButton.addEventListener("click", () => {
 
     checkLetter(letter);
     guessedLetterInput.value = "";
+
+    let allCorrect = arrayOfDiv.every((box) => box.classList.contains("correct"))
+
+    if (allCorrect) {
+        unlockedPic.classList.add("show");
+
+        setTimeout(() => {
+            unlockedPic.classList.remove("show");
+        }, 2000);
+    }
+
+    console.log(allCorrect)
 });
 
-
 console.log(arrayOfDiv)
-
-// ---------- STYLE ----------
-body.style.display = "flex"
-body.style.justifyContent = "center"
-body.style.alignItems = "center "
-body.style.height = "100px"
-body.style.flexDirection = "column"
-
-gamingArea.style.display = "flex"
-gamingArea.style.gap = "5px"
-wrongLetter.style.height = "20px"

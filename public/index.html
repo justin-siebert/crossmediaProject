@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="newspaper.css">
+    <link rel="stylesheet" href="guessTheWord.css">
     <title>Document</title>
 </head>
 <body>
@@ -52,7 +53,7 @@
     </div>
     <div id="firstMission" class="displayNone"></div>
     
-    <div id="guessTheWord" class="displayNone">
+    <div id="guessTheWord" class="">
         <div id="gamingArea"></div>
 
         <div>
@@ -61,6 +62,11 @@
         </div>
 
         <div id="wrongLetter"></div>
+        <div id="triedAlready"></div>
+
+        <div id="unlocked" class="hidden">
+            <img src="bilder/unlocked.png" alt="">
+        </div>
     </div>
 
     <button class="displayNone" id="closeSectionButton" type="button">Close</button>
