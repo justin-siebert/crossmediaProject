@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="newspaper.css">
     <link rel="stylesheet" href="guessTheWord.css">
+    <link rel="stylesheet" href="memory.css">
     <title>Document</title>
 </head>
 <body>
@@ -53,7 +54,7 @@
     </div>
     <div id="firstMission" class="displayNone"></div>
     
-    <div id="guessTheWord" class="">
+    <div id="guessTheWord" class="displayNone">
         <div id="gamingArea"></div>
 
         <div>
@@ -69,9 +70,15 @@
         </div>
     </div>
 
+    <div id="memory">
+        <p>Hitta de två som matchar</p>
+        <div id="memoryContainer"></div>
+    </div>
+
     <button class="displayNone" id="closeSectionButton" type="button">Close</button>
     <script src="firstmission.js"></script>
     <script src="guessTheWord.js"></script>
+    <script src="memory.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
