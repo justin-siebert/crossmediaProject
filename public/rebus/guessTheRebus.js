@@ -47,23 +47,32 @@ const rebusArray = [
 //fixa loop för att få ut emojies
 
 const gamingArea = document.querySelector(".gamingArea");
+const guessTheRebus = document.querySelector(".guessTheRebus");
+const plusSign = document.createElement("p");
+const img1 = document.querySelector("#rebusImage1");
+const img2 = document.querySelector("#rebusImage2");
+const answerSection = document.querySelector(".answerSection");
 
-function getRebus() {
+function updateImages() {
     for (let i = 0; i < rebusArray.length; i++) {
-        const img1 = document.createElement("img");
-        img1.classList.add("img1");
+
         img1.src = rebusArray[i].word1;
-
-        const img2 = document.createElement("img");
-        img2.classList.add("img2");
+        console.log(img1.src, "första bilden i iterationen")
         img2.src = rebusArray[i].word2;
+        console.log(img2.src, "andra bilden i iterationen")
+    }
 
-        gamingArea.appendChild(img1);
-        gamingArea.appendChild(img2);
+}
 
+function getInputBoxes() {
 
+    for (let i = 0; i < rebusArray[i].correctAnswer.length; i++) {
+        const inputBox = document.createElement("input");
+        inputBox.classList.add("inputBox");
+
+        answerSection.appendChild(inputBox);
     }
 }
 
-getRebus();
-
+updateImages();
+getInputBoxes()
