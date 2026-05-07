@@ -56,21 +56,22 @@ const guessBtn = document.querySelector("#guessButton");
 
 let currentIndex = 0;
 
-guessBtn.addEventListener("click", checkAnswer() {
-
-})
-
 function checkAnswer() {
     const inputs = document.querySelectorAll(".inputBox");
     let userGuess = "";
 
     inputs.forEach(input => {
         userGuess += input.value;
-        userGuess.toLowerCase()
+
+        console.log(userGuess, "användarens gissning")
     });
+
+    userGuess = userGuess.toLowerCase()
 
     if (userGuess === rebusArray[currentIndex].correctAnswer) {
         console.log("Rätt!")
+        currentIndex++
+        updateImages()
     } else {
         console.log("Fel!")
     }
@@ -100,6 +101,11 @@ function updateImages() {
     getInputBoxes(currentRebus)
 }
 
+
+guessBtn.addEventListener("click", () => {
+    console.log("Nu trycks det på guess-knappen!")
+    checkAnswer();
+})
 
 
 updateImages();
