@@ -52,8 +52,29 @@ const plusSign = document.createElement("p");
 const img1 = document.querySelector("#rebusImage1");
 const img2 = document.querySelector("#rebusImage2");
 const answerSection = document.querySelector(".answerSection");
+const guessBtn = document.querySelector("#guessButton");
 
 let currentIndex = 0;
+
+guessBtn.addEventListener("click", checkAnswer() {
+
+})
+
+function checkAnswer() {
+    const inputs = document.querySelectorAll(".inputBox");
+    let userGuess = "";
+
+    inputs.forEach(input => {
+        userGuess += input.value;
+        userGuess.toLowerCase()
+    });
+
+    if (userGuess === rebusArray[currentIndex].correctAnswer) {
+        console.log("Rätt!")
+    } else {
+        console.log("Fel!")
+    }
+}
 
 function getInputBoxes(rebus) {
 
@@ -79,4 +100,8 @@ function updateImages() {
     getInputBoxes(currentRebus)
 }
 
+
+
 updateImages();
+
+

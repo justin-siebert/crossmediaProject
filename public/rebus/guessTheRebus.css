@@ -65,3 +65,8 @@ body {
     height: 20px;
     border: 1px solid grey;
 }
+
+#rebusPlus {
+    color: black;
+    font-size: 50px;
+}
