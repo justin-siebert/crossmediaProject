@@ -31,11 +31,11 @@ async function typeOutSlowly(words) {
 
 window.addEventListener("keydown", async(event) => {
     if (event.key === "Enter" && count == 0){
+        count++
         await typeOutSlowly(["FRÅN:", "Anonym_Källa_82"])
         await typeOutSlowly(["TILL:", "[REDAKTIONEN]"])
         await typeOutSlowly(["ÄMNE:", "Det som döljer sig under betongen..."])
         await typeOutSlowly(text.split(" "))
-        count++
     }
 })
 
