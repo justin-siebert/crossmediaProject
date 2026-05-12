@@ -1,9 +1,10 @@
 const textContainer = document.querySelector("#textContainer");
+const main = document.querySelector("main");
 const textArea = document.querySelector("textArea");
 
 const signs = [".", ",", "!", "?", "+", "-", ";", ":"]
 const checkLength = []
-function sendEmail() {
+async function sendEmail() {
     if(!textArea.value){
         alert("Fält får inte lämnas tom")
         return
@@ -17,7 +18,18 @@ function sendEmail() {
 
     if(checkLength.length < 10){
         alert("Skriv minst 10 ord")
+        return
+    } else {
+        main.innerHTML = "";
+        textContainer.textContent = ""
+        const answer = "Uppfattat.Gör nånting åt det.Mvh Chefen"
+        await typeOutSlowly(["FRÅN:", "CHEFEN"])
+        await typeOutSlowly(["TILL:", "UNDERCOVER POPO"])
+        await typeOutSlowly(["ÄMNE:", "Uppdatering Infiltrering"])
+        await typeOutSlowly("----------------------------")
+        await typeOutSlowly(answer.split(" "))
     }
+
 }
 
 
@@ -53,14 +65,8 @@ async function typeOutSlowly(words) {
     }
 }
 
-window.addEventListener("keydown", async(event) => {
-    if (event.key === "Enter" && count == 0){
-        count++
-        // await typeOutSlowly(["FRÅN:", "Anonym_Källa_82"])
-        // await typeOutSlowly(["TILL:", "[REDAKTIONEN]"])
-        // await typeOutSlowly(["ÄMNE:", "Det som döljer sig under betongen..."])
-        await typeOutSlowly(text.split(" "))
-    }
+document.addEventListener("DOMContentLoaded", async(event) => {
+    await typeOutSlowly(text.split(" "))   
 })
 
 let text = "Rapportera läget tillbaka till din chef. Skriv ett mejl om vad du såg."
