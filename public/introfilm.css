@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+}
+
+
+p {
+    color: yellow;
+    font-size: 40px;
+    margin-bottom: 0px;
+    margin-top: 0;
+}
+
+#VIKTIGT {
+    margin-top: 30px;
+    
+}
