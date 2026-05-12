@@ -19,6 +19,7 @@ body {
 
 .phone {
     height: 100%;
+    max-width: 400px;
     min-width: 20%;
     cursor: pointer;
     display: flex;
@@ -38,6 +39,8 @@ body {
     height: 40%;
     border: 2px solid red;
     background-color: rgb(138, 120, 120);
+    max-width: 400px;
+    width: 220px;
 }
 
 #gamingAreaRebus {
@@ -133,5 +136,5 @@ body {
 }
 
 .hintMessage {
-    font-size: 16px;
+    font-size: 12px;
 }

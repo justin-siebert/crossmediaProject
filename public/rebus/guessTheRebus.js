@@ -10,7 +10,7 @@ const rebusArray = [
         word1: "../bilder/emojies/butter.png",
         word2: "../bilder/emojies/fly.png",
         correctAnswer: "butterfly",
-        hint: "A glowing insect at night"
+        hint: "Comes in different colors and patterns"
 
     },
     {
@@ -22,8 +22,8 @@ const rebusArray = [
     },
     {
         word1: "../bilder/emojies/pagophagia.png",
-        word2: "../bilder/emojies/smiley.png",
-        correctAnswer: "ice cream",
+        word2: "../bilder/emojies/scream.png",
+        correctAnswer: "icecream",
         hint: "A cold sweet treat"
 
     },
@@ -42,7 +42,7 @@ const rebusArray = [
 
     },
     {
-        word1: "../bilder/emojies/construction-and-tools.png",
+        word1: "../bilder/emojies/dunes.png",
         word2: "../bilder/emojies/package.png",
         correctAnswer: "sandbox",
         hint: "Where children play at the playground"
@@ -65,6 +65,7 @@ const revealBtn = document.querySelector("#revealButton");
 const nextBtn = document.createElement("button");
 const phoneDiv = document.querySelector(".phone");
 const actionsButtonsDiv = document.querySelector(".actionsButtons");
+const hintMessage = document.querySelector(".hintMessage");
 
 const overlayMessageDiv = document.createElement("div");
 const victoryMessageDiv = document.createElement("div");
@@ -88,7 +89,9 @@ nextBtn.id = "nextButton";
 nextBtn.textContent = "NEXT REBUS";
 
 let currentIndex = 0;
-let revealTracker = 2;
+let revealTracker = 0;
+let finishedTracker = 0;
+let hintTracker = 0;
 
 function checkAnswer() {
     if (phoneDiv.contains(wrongAnswerDiv)) {
@@ -107,15 +110,28 @@ function checkAnswer() {
 
     if (userGuess === rebusArray[currentIndex].correctAnswer) {
         console.log("Rätt!")
+        console.log(currentIndex);
+
+        if (currentIndex === 6) {
+            finishedTracker = currentIndex;
+            getVictoryOverlay();
+        }
         currentIndex++
 
         getVictoryOverlay();
-    } else {
+    }
+    else {
         getFailureMessage();
     }
+
+}
+
+function getFinishedPage() {
+    console.log("HEEEEJJ");
 }
 
 function getVictoryOverlay() {
+
     victoryMessageText.textContent = "CORRECT!";
     correctAnswerText.textContent = `The answer was: ${rebusArray[currentIndex].correctAnswer}`;
     victoryMessageDiv.appendChild(victoryMessageText);
@@ -136,6 +152,9 @@ function getFailureMessage() {
 }
 
 function getHint() {
+
+    hintTracker++
+
     const hintText = document.createElement("span");
     const hintSpan = document.createElement("span");
 
@@ -150,6 +169,29 @@ function getHint() {
     gamingArea.appendChild(hintSpan);
 }
 
+function revealAnswer() {
+
+    revealBtn.disabled = true;
+    hintBtn.disabled = true;
+    revealTracker++
+
+    console.log("vi ska reveala svaret!");
+    console.log(revealTracker, " revealTracker borde vara större än 0");
+
+    if (revealTracker > 0) {
+        const inputBoxesList = document.querySelectorAll(".inputBox");
+
+        inputBoxesList.forEach((box, index) => {
+
+            if (index < rebusArray[currentIndex].correctAnswer.length) {
+                box.value = rebusArray[currentIndex].correctAnswer[index];
+            }
+        })
+    }
+
+    guessBtn.textContent = "Next rebus";
+}
+
 function getInputBoxes(rebus) {
 
     answerSection.innerHTML = "";
@@ -160,9 +202,13 @@ function getInputBoxes(rebus) {
 
         answerSection.appendChild(inputBox);
     }
+
 }
 
-function updateImages() {
+function getNewImages() {
+
+    checkHintAndRevealTrackers();
+    guessBtn.textContent = "Guess";
 
     const currentRebus = rebusArray[currentIndex];
 
@@ -175,7 +221,9 @@ function updateImages() {
 }
 
 nextBtn.addEventListener("click", () => {
-    console.log("Nu trycks det på next-knappen!");
+    if (finishedTracker === 6) {
+        getFinishedPage();
+    }
     hintBtn.disabled = false;
     revealBtn.disabled = false;
     updateImages();
@@ -187,26 +235,61 @@ nextBtn.addEventListener("click", () => {
             gamingArea.removeChild(span);
         })
     }
+
+    removeHintElements();
 })
 
+function checkHintAndRevealTrackers() {
+    if (hintTracker >= 2) {
+        hintBtn.disabled = true;
+    } else {
+        hintBtn.disabled = false;
+    }
+
+    if (revealTracker >= 2) {
+        revealTracker.disabled = true;
+    } else {
+        revealTracker.disabled = false;
+    }
+}
+
+function removeHintElements() {
+    if (hintMessage) {
+        gamingArea.removeChild(hintMessage);
+    }
+}
+
 guessBtn.addEventListener("click", () => {
-    console.log("Nu trycks det på guess-knappen!")
-    checkAnswer();
+    console.log(revealTracker, "om revealTracker är större än 0 --> ")
+
+    if (revealTracker > 0) {
+        currentIndex++;
+        getNewImages();
+        checkHintAndRevealTrackers()
+    } else {
+        checkAnswer();
+    }
 })
 
 hintBtn.addEventListener("click", () => {
-    console.log("Jag behöver en hint tack!");
     hintBtn.disabled = true;
+
+    if (hintTracker >= 2) {
+        alert("You have already used up your hints. Either reveal or continue to guess.");
+    }
     getHint();
 
 })
 
 revealBtn.addEventListener("click", () => {
     console.log("Jag vill veta svaret!");
-    revealBtn.disabled = true;
+
+    if (revealTracker >= 2) {
+        alert("You have already used up your reveals.");
+    }
+    revealAnswer();
 })
 
 
-updateImages();
-
-
+getNewImages();
+checkHintAndRevealTrackers()
