@@ -66,6 +66,8 @@ const nextBtn = document.createElement("button");
 const phoneDiv = document.querySelector(".phone");
 const actionsButtonsDiv = document.querySelector(".actionsButtons");
 const hintMessage = document.querySelector(".hintMessage");
+const hintTrackerForUser = document.getElementById("hintTrackerForUser");
+const revealTrackerForUser = document.getElementById("revealTrackerForUser");
 
 const overlayMessageDiv = document.createElement("div");
 const victoryMessageDiv = document.createElement("div");
@@ -92,8 +94,19 @@ let currentIndex = 0;
 let revealTracker = 0;
 let finishedTracker = 0;
 let hintTracker = 0;
+let wasRevealed = false;
+let hintsLeft = 2;
+let revealsLeft = 2;
+
+hintTrackerForUser.textContent = `Hints left: ${hintsLeft}`;
+revealTrackerForUser.textContent = `Reveals left: ${revealsLeft}`;
 
 function checkAnswer() {
+
+    if (revealTracker === 1) {
+        revealBtn.disabled = false;
+    }
+
     if (phoneDiv.contains(wrongAnswerDiv)) {
         phoneDiv.removeChild(wrongAnswerDiv);
     }
@@ -114,20 +127,32 @@ function checkAnswer() {
 
         if (currentIndex === 6) {
             finishedTracker = currentIndex;
-            getVictoryOverlay();
+            getFinishedPage();
         }
         currentIndex++
 
-        getVictoryOverlay();
+        if (wasRevealed) {
+            getNewImages();
+            checkHintAndRevealTrackers();
+        } else {
+            getVictoryOverlay();
+        }
+
     }
     else {
         getFailureMessage();
     }
-
 }
 
 function getFinishedPage() {
     console.log("HEEEEJJ");
+    phoneDiv.innerHTML = "";
+    const finishMessage1 = document.createElement("p");
+    const finishMessage2 = document.createElement("p");
+    finishMessage1.textContent = "YES!! Thank you, you´re the best!"
+    finishMessage2.textContent = "Ehm, uh I mean thanks I guess..."
+
+    phoneDiv.appendChild(finishMessage1);
 }
 
 function getVictoryOverlay() {
@@ -155,6 +180,8 @@ function getHint() {
 
     hintTracker++
 
+    hintsLeft--;
+    hintTrackerForUser.textContent = `Hints left: ${hintsLeft}`;
     const hintText = document.createElement("span");
     const hintSpan = document.createElement("span");
 
@@ -175,8 +202,14 @@ function revealAnswer() {
     hintBtn.disabled = true;
     revealTracker++
 
+    revealsLeft--;
+    revealTrackerForUser.textContent = `Reveals left: ${revealsLeft}`;
+
     console.log("vi ska reveala svaret!");
     console.log(revealTracker, " revealTracker borde vara större än 0");
+    console.log(revealTracker, `${revealTracker} använda av max 2 reveals`);
+
+    wasRevealed = true;
 
     if (revealTracker > 0) {
         const inputBoxesList = document.querySelectorAll(".inputBox");
@@ -186,23 +219,38 @@ function revealAnswer() {
             if (index < rebusArray[currentIndex].correctAnswer.length) {
                 box.value = rebusArray[currentIndex].correctAnswer[index];
             }
-        })
-    }
+        });
 
-    guessBtn.textContent = "Next rebus";
+        guessBtn.textContent = "Next rebus";
+    }
 }
 
 function getInputBoxes(rebus) {
 
     answerSection.innerHTML = "";
+    const allInputBoxes = [];
 
     for (let i = 0; i < rebus.correctAnswer.length; i++) {
         const inputBox = document.createElement("input");
+        inputBox.maxLength = 1;
         inputBox.classList.add("inputBox");
 
+        inputBox.addEventListener("input", function () {
+            if (this.value.length === 1) {
+                const nextInput = this.nextElementSibling;
+                if (nextInput && nextInput.classList.contains("inputBox")) {
+                    nextInput.focus();
+                }
+            }
+        });
+
         answerSection.appendChild(inputBox);
+        allInputBoxes.push(inputBox);
     }
 
+    if (allInputBoxes.length > 0) {
+        allInputBoxes[0].focus();
+    }
 }
 
 function getNewImages() {
@@ -211,6 +259,10 @@ function getNewImages() {
     guessBtn.textContent = "Guess";
 
     const currentRebus = rebusArray[currentIndex];
+
+    if (currentIndex === 3) {
+        getAgnetaMessage();
+    }
 
     img1.src = currentRebus.word1;
     console.log(img1.src, "första bilden i iterationen")
@@ -221,22 +273,15 @@ function getNewImages() {
 }
 
 nextBtn.addEventListener("click", () => {
+    console.log("12345")
     if (finishedTracker === 6) {
         getFinishedPage();
     }
     hintBtn.disabled = false;
     revealBtn.disabled = false;
-    updateImages();
+    getNewImages();
     removeVictoryOverlay();
 
-    const hintSpanElementsToRemove = document.querySelectorAll(".hintMessage");
-    if (hintSpanElementsToRemove) {
-        hintSpanElementsToRemove.forEach(span => {
-            gamingArea.removeChild(span);
-        })
-    }
-
-    removeHintElements();
 })
 
 function checkHintAndRevealTrackers() {
@@ -253,42 +298,41 @@ function checkHintAndRevealTrackers() {
     }
 }
 
-function removeHintElements() {
-    if (hintMessage) {
-        gamingArea.removeChild(hintMessage);
-    }
+function getAgnetaMessage() {
+    const AgnetaMessage = document.createElement("p");
+    AgnetaMessage.classList.add("AgnetaMessage");
+    AgnetaMessage.textContent = "Hurry up! Agneta is already one rebus ahead of you!";
+
+    phoneDiv.appendChild(AgnetaMessage);
+
+    setTimeout(() => {
+        AgnetaMessage.remove();
+    }, 5000);
+}
+
+function rebusIntroductionPage() {
+
 }
 
 guessBtn.addEventListener("click", () => {
-    console.log(revealTracker, "om revealTracker är större än 0 --> ")
+    console.log(revealTracker, "12345")
 
-    if (revealTracker > 0) {
-        currentIndex++;
-        getNewImages();
-        checkHintAndRevealTrackers()
-    } else {
-        checkAnswer();
-    }
+    const hintSpanElementsToRemove = document.querySelectorAll(".hintMessage");
+    console.log(hintSpanElementsToRemove, "span-element som ska tas bort inför nästa rebus")
+    hintSpanElementsToRemove.forEach(span => span.remove());
+    checkAnswer();
 })
 
 hintBtn.addEventListener("click", () => {
     hintBtn.disabled = true;
-
-    if (hintTracker >= 2) {
-        alert("You have already used up your hints. Either reveal or continue to guess.");
-    }
     getHint();
-
 })
 
 revealBtn.addEventListener("click", () => {
     console.log("Jag vill veta svaret!");
-
-    if (revealTracker >= 2) {
-        alert("You have already used up your reveals.");
-    }
     revealAnswer();
 })
+
 
 
 getNewImages();
