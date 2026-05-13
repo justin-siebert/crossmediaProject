@@ -74,6 +74,7 @@ const victoryMessageDiv = document.createElement("div");
 const victoryMessageText = document.createElement("p");
 const correctAnswerText = document.createElement("p");
 const img = document.createElement("img");
+const excitedMessage = document.createElement("p");
 
 const wrongAnswerDiv = document.createElement("div");
 const wrongAnswerText = document.createElement("p");
@@ -84,6 +85,7 @@ victoryMessageDiv.classList.add("victoryMessageDiv");
 victoryMessageText.classList.add("victoryMessageText");
 correctAnswerText.classList.add("correctAnswerText");
 img.classList.add("mogelostenFinalPage");
+excitedMessage.classList.add("excitedMessage");
 
 wrongAnswerDiv.classList.add("wrongAnswerDiv");
 wrongAnswerText.classList.add("wrongAnswerText");
@@ -94,11 +96,12 @@ nextBtn.textContent = "NEXT REBUS";
 
 let currentIndex = 0;
 let revealTracker = 0;
-let finishedTracker = 0;
+let finishedTracker = false;
 let hintTracker = 0;
 let wasRevealed = false;
 let hintsLeft = 2;
 let revealsLeft = 2;
+let currentRebus = undefined;
 
 hintTrackerForUser.textContent = `Hints left: ${hintsLeft}`;
 revealTrackerForUser.textContent = `Reveals left: ${revealsLeft}`;
@@ -127,6 +130,14 @@ function checkAnswer() {
         console.log("Rätt!")
         console.log(currentIndex);
 
+        if (currentIndex === 6) {
+            finishedTracker = true;
+        }
+
+        if (finishedTracker) {
+            getFinishedPage();
+        }
+
         currentIndex++
 
         if (wasRevealed) {
@@ -145,17 +156,19 @@ function checkAnswer() {
 function getFinishedPage() {
     console.log("HEEEEJJ");
     phoneDiv.innerHTML = "";
+    img.classList.add("blinking_mogelost");
 
     img.src = "../bilder/glad_mogelost.png";
 
-    const excitedMessage = document.createElement("p");
-    const finishMessage1 = document.createElement("p");
-    const finishMessage2 = document.createElement("p");
-    finishMessage1.textContent = "YES!! Thank you, you´re the best!"
-    finishMessage2.textContent = "Ehm, uh I mean thanks I guess..."
+    excitedMessage.textContent = "YES!! Thank you, you´re the best!"
+    phoneDiv.appendChild(excitedMessage);
+    phoneDiv.appendChild(img);
 
-
-    phoneDiv.appendChild(finishMessage1, img);
+    setTimeout(() => {
+        img.classList.remove("blinking_mogelost");
+        img.src = "../bilder/mogelosten_armar_i_kors.png";
+        excitedMessage.textContent = "Ehm, uh I mean thanks I guess..."
+    }, 4000);
 }
 
 function getVictoryOverlay() {
@@ -261,30 +274,27 @@ function getNewImages() {
     checkHintAndRevealTrackers();
     guessBtn.textContent = "Guess";
 
-    const currentRebus = rebusArray[currentIndex];
+    currentRebus = rebusArray[currentIndex];
 
-    if (currentIndex === 6) {
-        finishedTracker = currentIndex;
-        getFinishedPage();
+    if (currentRebus) {
+
+        if (currentIndex === 3) {
+            getAgnetaMessage();
+        }
+
+        img1.src = currentRebus.word1;
+        console.log(img1.src, "första bilden i iterationen")
+        img2.src = currentRebus.word2;
+        console.log(img2.src, "andra bilden i iterationen");
+
+        getInputBoxes(currentRebus)
     }
 
-    if (currentIndex === 3) {
-        getAgnetaMessage();
-    }
-
-    img1.src = currentRebus.word1;
-    console.log(img1.src, "första bilden i iterationen")
-    img2.src = currentRebus.word2;
-    console.log(img2.src, "andra bilden i iterationen");
-
-    getInputBoxes(currentRebus)
 }
 
 nextBtn.addEventListener("click", () => {
     console.log("12345")
-    if (finishedTracker === 6) {
-        getFinishedPage();
-    }
+
     hintBtn.disabled = false;
     revealBtn.disabled = false;
     getNewImages();
