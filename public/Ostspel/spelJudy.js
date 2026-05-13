@@ -46,9 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 osten.style.display = "none";
                 slutText.textContent = "Snyggt jobbat! Du klarade det!";
                 spelSlut.classList.remove("displayNone");
-                goraOmBtn.textContent = "Haha bra";
+                goraOmBtn.textContent = "Haha, ok gå tillbaks";
                 goraOmBtn.onclick = function() {
-                    // lägg till nästa sida här
+                    window.location.href = "https://www.instagram.com/j/AbbgADJhSCDRXNir/"; // ← byt ut mot din länk
                 };
             }
         };
