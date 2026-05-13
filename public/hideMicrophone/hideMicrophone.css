@@ -8,8 +8,6 @@ body {
     box-sizing: border-box;
 }
 
-
-
 .gameContainer {
     display: flex;
     justify-content: center;
@@ -32,4 +30,22 @@ body {
     border-radius: 30px;
     justify-content: center;
     gap: 20px;
+}
+
+.hideImg {
+    height: 200px;
+}
+
+#microphoneImg {
+    cursor: pointer;
+    transition: transform 0.8s ease-in-out;
+    z-index: 2;
+}
+
+#stoneImg {
+    width: 220px;
+}
+
+#microphoneImg.moveIntoStone {
+    transform: translateY(207px) scale(0.6);
 }
