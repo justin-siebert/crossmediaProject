@@ -73,6 +73,7 @@ const overlayMessageDiv = document.createElement("div");
 const victoryMessageDiv = document.createElement("div");
 const victoryMessageText = document.createElement("p");
 const correctAnswerText = document.createElement("p");
+const img = document.createElement("img");
 
 const wrongAnswerDiv = document.createElement("div");
 const wrongAnswerText = document.createElement("p");
@@ -82,6 +83,7 @@ overlayMessageDiv.classList.add("overlayMessageDiv");
 victoryMessageDiv.classList.add("victoryMessageDiv");
 victoryMessageText.classList.add("victoryMessageText");
 correctAnswerText.classList.add("correctAnswerText");
+img.classList.add("mogelostenFinalPage");
 
 wrongAnswerDiv.classList.add("wrongAnswerDiv");
 wrongAnswerText.classList.add("wrongAnswerText");
@@ -125,10 +127,6 @@ function checkAnswer() {
         console.log("Rätt!")
         console.log(currentIndex);
 
-        if (currentIndex === 6) {
-            finishedTracker = currentIndex;
-            getFinishedPage();
-        }
         currentIndex++
 
         if (wasRevealed) {
@@ -147,12 +145,17 @@ function checkAnswer() {
 function getFinishedPage() {
     console.log("HEEEEJJ");
     phoneDiv.innerHTML = "";
+
+    img.src = "../bilder/glad_mogelost.png";
+
+    const excitedMessage = document.createElement("p");
     const finishMessage1 = document.createElement("p");
     const finishMessage2 = document.createElement("p");
     finishMessage1.textContent = "YES!! Thank you, you´re the best!"
     finishMessage2.textContent = "Ehm, uh I mean thanks I guess..."
 
-    phoneDiv.appendChild(finishMessage1);
+
+    phoneDiv.appendChild(finishMessage1, img);
 }
 
 function getVictoryOverlay() {
@@ -259,6 +262,11 @@ function getNewImages() {
     guessBtn.textContent = "Guess";
 
     const currentRebus = rebusArray[currentIndex];
+
+    if (currentIndex === 6) {
+        finishedTracker = currentIndex;
+        getFinishedPage();
+    }
 
     if (currentIndex === 3) {
         getAgnetaMessage();
