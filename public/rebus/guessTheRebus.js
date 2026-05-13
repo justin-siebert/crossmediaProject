@@ -59,12 +59,12 @@ const guessTheRebus = document.querySelector(".guessTheRebus");
 const img1 = document.querySelector("#rebusImage1");
 const img2 = document.querySelector("#rebusImage2");
 const answerSection = document.querySelector(".answerSection");
-const guessBtn = document.querySelector("#guessButton");
-const hintBtn = document.querySelector("#hintButton");
-const revealBtn = document.querySelector("#revealButton");
+const guessBtn = document.createElement("button");
+const hintBtn = document.createElement("button");
+const revealBtn = document.createElement("button");
 const nextBtn = document.createElement("button");
 const phoneDiv = document.querySelector(".phone");
-const actionsButtonsDiv = document.querySelector(".actionsButtons");
+const actionsButtonsDiv = document.querySelector(".actionButtons");
 const hintMessage = document.querySelector(".hintMessage");
 const hintTrackerForUser = document.getElementById("hintTrackerForUser");
 const revealTrackerForUser = document.getElementById("revealTrackerForUser");
@@ -75,6 +75,8 @@ const victoryMessageText = document.createElement("p");
 const correctAnswerText = document.createElement("p");
 const img = document.createElement("img");
 const excitedMessage = document.createElement("p");
+const startBtn = document.createElement("button");
+const introText = document.createElement("p");
 
 const wrongAnswerDiv = document.createElement("div");
 const wrongAnswerText = document.createElement("p");
@@ -85,14 +87,32 @@ victoryMessageDiv.classList.add("victoryMessageDiv");
 victoryMessageText.classList.add("victoryMessageText");
 correctAnswerText.classList.add("correctAnswerText");
 img.classList.add("mogelostenFinalPage");
-excitedMessage.classList.add("excitedMessage");
+excitedMessage.classList.add("textStyling");
+introText.classList.add("textStyling");
+introText.id = "introText";
 
 wrongAnswerDiv.classList.add("wrongAnswerDiv");
 wrongAnswerText.classList.add("wrongAnswerText");
 
-nextBtn.classList.add("actionButtons");
 nextBtn.id = "nextButton";
+nextBtn.classList.add("actionButtons");
 nextBtn.textContent = "NEXT REBUS";
+
+startBtn.id = "startBtn";
+startBtn.classList.add("actionButtons");
+startBtn.textContent = "START GAME";
+
+revealBtn.id = "revealBtn";
+revealBtn.classList.add("actionButtons")
+revealBtn.textContent = "REVEAL"
+
+guessBtn.id = "guessBtn";
+guessBtn.classList.add("actionButtons");
+guessBtn.textContent = "GUESS";
+
+hintBtn.id = "hintBtn";
+hintBtn.classList.add("actionButtons");
+hintBtn.textContent = "HINT";
 
 let currentIndex = 0;
 let revealTracker = 0;
@@ -272,7 +292,7 @@ function getInputBoxes(rebus) {
 function getNewImages() {
 
     checkHintAndRevealTrackers();
-    guessBtn.textContent = "Guess";
+    guessBtn.textContent = "GUESS";
 
     currentRebus = rebusArray[currentIndex];
 
@@ -310,9 +330,9 @@ function checkHintAndRevealTrackers() {
     }
 
     if (revealTracker >= 2) {
-        revealTracker.disabled = true;
+        revealBtn.disabled = true;
     } else {
-        revealTracker.disabled = false;
+        revealBtn.disabled = false;
     }
 }
 
@@ -329,7 +349,29 @@ function getAgnetaMessage() {
 }
 
 function rebusIntroductionPage() {
+    introText.textContent = "There are in total 7 rounds that you have to finish before Agneta57! You have two reveals and two hints to your help. Good luck!";
 
+    gamingArea.classList.remove("active");
+    phoneDiv.insertBefore(introText, actionsButtonsDiv);
+
+    actionsButtonsDiv.innerHTML = "";
+    actionsButtonsDiv.appendChild(startBtn);
+}
+
+function showGame() {
+    if (introText) {
+        introText.remove();
+    }
+
+    gamingArea.classList.add("active");
+    gamingArea.style.display = "flex";
+
+    actionsButtonsDiv.innerHTML = "";
+    actionsButtonsDiv.appendChild(guessBtn);
+    actionsButtonsDiv.appendChild(hintBtn);
+    actionsButtonsDiv.appendChild(revealBtn);
+
+    getNewImages();
 }
 
 guessBtn.addEventListener("click", () => {
@@ -351,7 +393,9 @@ revealBtn.addEventListener("click", () => {
     revealAnswer();
 })
 
+startBtn.addEventListener("click", () => {
+    showGame();
+})
 
-
-getNewImages();
+rebusIntroductionPage()
 checkHintAndRevealTrackers()
