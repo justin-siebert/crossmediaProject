@@ -13,6 +13,7 @@ clickMessage.textContent = "Klicka på mikrofonen!";
 phoneDiv.prepend(clickMessage);
 
 microphone.addEventListener("click", () => {
+    clickMessage.remove();
     microphone.classList.add("moveIntoStone");
 
     successText.textContent = "En riktig rackare är du! Är här de nästa koordinaterna som du behöver för att ta dig vidare:"
@@ -21,6 +22,6 @@ microphone.addEventListener("click", () => {
     successText.append("55.611321, 12.973578");
 
     setTimeout(() => {
-        phoneDiv.appendChild(successText);
+        phoneDiv.prepend(successText);
     }, 1000);
 })
