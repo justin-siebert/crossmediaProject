@@ -180,14 +180,29 @@ function getFinishedPage() {
 
     img.src = "../bilder/glad_mogelost.png";
 
-    excitedMessage.textContent = "YES!! Thank you, you´re the best!"
+    excitedMessage.textContent = "YES!! Thank you, you're the best!";
     phoneDiv.appendChild(excitedMessage);
     phoneDiv.appendChild(img);
+
+    // --- HÄR SPARAS REBUS-VINSTEN ---
+    localStorage.setItem("rebusTaskDone", "true"); 
+    // --------------------------------
 
     setTimeout(() => {
         img.classList.remove("blinking_mogelost");
         img.src = "../bilder/mogelosten_armar_i_kors.png";
-        excitedMessage.textContent = "Ehm, uh I mean thanks I guess..."
+        excitedMessage.textContent = "Ehm, uh I mean thanks I guess...";
+
+        const backToMenuBtn = document.createElement("button");
+        backToMenuBtn.textContent = "BACK TO MENU";
+        backToMenuBtn.classList.add("actionButtons");
+        backToMenuBtn.style.marginTop = "20px";
+        
+        backToMenuBtn.addEventListener("click", () => {
+            window.location.href = "../index.html"; 
+        });
+
+        phoneDiv.appendChild(backToMenuBtn);
     }, 4000);
 }
 

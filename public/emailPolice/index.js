@@ -28,6 +28,12 @@ async function sendEmail() {
         await typeOutSlowly(["ÄMNE:", "Uppdatering Infiltrering"])
         await typeOutSlowly("----------------------------")
         await typeOutSlowly(answer.split(" "))
+        // När mejlet har "skickats" (t.ex. vid klick på skicka-knappen)
+        localStorage.setItem("emailTaskDone", "true");
+
+        setTimeout(()=>{
+            window.location.href = "../index.html";
+        }, 500)
     }
 
 }

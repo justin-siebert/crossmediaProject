@@ -64,19 +64,11 @@ enterButton.addEventListener("click", () => {
 
     let allCorrect = arrayOfDiv.every((box) => box.classList.contains("correct"))
 
-    // if (allCorrect) {
-    //     unlockedPic.classList.add("show");
-
-    //     setTimeout(() => {
-    //         unlockedPic.classList.remove("show");
-    //     }, 2000);
-    // }
-
     if (allCorrect){
         const newsPaperSection = document.querySelector("#newsPaperSection")
         setTimeout(() => {
             body.innerHTML = "";
-            body.textContent = "Well done"
+            body.textContent = "Välkommen åter"
         }, 500)
         setTimeout( () => {
             window.location.href = "../newspaper/newspaper.html";

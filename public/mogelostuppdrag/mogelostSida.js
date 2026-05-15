@@ -49,6 +49,8 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
+        localStorage.setItem("electricTaskDone", "true");
+
         sida4.classList.add("displayNone");
         sida5.classList.remove("displayNone");
     });
