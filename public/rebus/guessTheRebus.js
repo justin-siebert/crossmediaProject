@@ -183,11 +183,22 @@ function getFinishedPage() {
     excitedMessage.textContent = "YES!! Tack snälla, du är bäst!"
     phoneDiv.appendChild(excitedMessage);
     phoneDiv.appendChild(img);
-
+    
+    localStorage.setItem("rebusTaskDone", "true"); 
+    
     setTimeout(() => {
         img.classList.remove("blinking_mogelost");
         img.src = "../bilder/mogelosten_armar_i_kors.png";
         excitedMessage.textContent = "Ehm, uh jag menar tack antar jag..."
+
+        const backToMenuBtn = document.createElement("button");
+        backToMenuBtn.textContent = "BACK TO MENU";
+        backToMenuBtn.classList.add("actionButtons");
+        backToMenuBtn.style.marginTop = "20px";
+
+        backToMenuBtn.addEventListener("click", () => {
+            window.location.href = "../index.html"; 
+        });
     }, 4000);
 }
 
