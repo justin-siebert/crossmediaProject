@@ -180,14 +180,14 @@ function getFinishedPage() {
 
     img.src = "../bilder/glad_mogelost.png";
 
-    excitedMessage.textContent = "YES!! Thank you, you´re the best!"
+    excitedMessage.textContent = "YES!! Tack snälla, du är bäst!"
     phoneDiv.appendChild(excitedMessage);
     phoneDiv.appendChild(img);
 
     setTimeout(() => {
         img.classList.remove("blinking_mogelost");
         img.src = "../bilder/mogelosten_armar_i_kors.png";
-        excitedMessage.textContent = "Ehm, uh I mean thanks I guess..."
+        excitedMessage.textContent = "Ehm, uh jag menar tack antar jag..."
     }, 4000);
 }
 
@@ -339,7 +339,7 @@ function checkHintAndRevealTrackers() {
 function getAgnetaMessage() {
     const AgnetaMessage = document.createElement("p");
     AgnetaMessage.classList.add("AgnetaMessage");
-    AgnetaMessage.textContent = "Hurry up! Agneta is already one rebus ahead of you!";
+    AgnetaMessage.textContent = "Skynda dig! Agneta är en rebus före dig!";
 
     phoneDiv.appendChild(AgnetaMessage);
 
@@ -349,7 +349,7 @@ function getAgnetaMessage() {
 }
 
 function rebusIntroductionPage() {
-    introText.textContent = "There are in total 7 rounds that you have to finish before Agneta57! You have two reveals and two hints to your help. Good luck!";
+    introText.textContent = "Det är totalt 7 rundor som du behöver göra klart innan Agneta57 för att 1:a och bli rebusmästare! Du har två reveals och två hintar till hjälp. Lycka till!";
 
     gamingArea.classList.remove("active");
     phoneDiv.insertBefore(introText, actionsButtonsDiv);
