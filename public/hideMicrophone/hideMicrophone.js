@@ -25,7 +25,7 @@ microphone.addEventListener("click", () => {
     
     // Vi skapar en span för koordinaterna så de syns tydligt
     const coordSpan = document.createElement("span");
-    coordSpan.textContent = "55.611321, 12.973578";
+    coordSpan.textContent = "55.610636, 12.974856";
     coordSpan.style.fontWeight = "bold";
     coordSpan.style.display = "block";
     successText.appendChild(coordSpan);

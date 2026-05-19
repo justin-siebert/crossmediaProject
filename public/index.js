@@ -8,7 +8,7 @@ const locations = {
     end: { lat: 55.610636, lon: 12.974856, key: "endUnlocked", name: "Gängträffen" }
 };
 
-const THRESHOLD = 50; 
+const THRESHOLD = 30; 
 
 document.addEventListener("DOMContentLoaded", () => {
     updateMenu();
