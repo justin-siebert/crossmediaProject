@@ -195,6 +195,7 @@ function getFinishedPage() {
         backToMenuBtn.textContent = "BACK TO MENU";
         backToMenuBtn.classList.add("actionButtons");
         backToMenuBtn.style.marginTop = "20px";
+        phoneDiv.append(backToMenuBtn)
 
         backToMenuBtn.addEventListener("click", () => {
             window.location.href = "../index.html"; 
