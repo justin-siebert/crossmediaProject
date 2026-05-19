@@ -52,33 +52,7 @@ input, button {
     font-size: 14px;
 }
 
-#unlocked {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: black;
-
-    opacity: 0;
-    transform: translateY(50px); /* startläge */
-    transition: all 0.5s ease;
-}
-
-/* när den ska synas */
-#unlocked.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-#unlocked img {
-    width: 80%;
-    max-width: 400px;
-}
 
 .hidden {
     pointer-events: none;

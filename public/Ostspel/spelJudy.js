@@ -44,12 +44,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 clearInterval(interval);
                 osten.removeEventListener("click", klickHandler);
                 osten.style.display = "none";
+
+                localStorage.setItem("cheeseTaskDone", "true");
+                
                 slutText.textContent = "Snyggt jobbat! Du klarade det!";
                 spelSlut.classList.remove("displayNone");
-                goraOmBtn.textContent = "Haha, ok gå tillbaks";
+                goraOmBtn.textContent = "Gå tillbaka till uppdragen";
                 goraOmBtn.onclick = function() {
-                    window.location.href = "https://www.instagram.com/j/AbbgADJhSCDRXNir/"; // ← byt ut mot din länk
-                };
+                    window.location.href = "../index.html";
+                }
             }
         };
 
