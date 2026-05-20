@@ -1,4 +1,3 @@
-// --- Gemensamma variabler ---
 const pincode = ["1", "3", "1", "2"];
 let userChosenPin = [];
 let wrongs = 0;
@@ -99,7 +98,6 @@ async function typeOutSlowly(words) {
         await sleep(20);
     }
     
-    // Visa knappen (oavsett om den heter startBtn eller är en vanlig knapp)
     const btn = document.querySelector("button[onclick='startGame()']");
     if (btn) btn.style.display = "block";
 }
