@@ -1,5 +1,4 @@
 body {
-    background-color: pink;
     width: 100%;
     max-width: 100%;
     margin: 0px;
@@ -30,7 +29,6 @@ body {
     align-items: center;
     font-size: 10px;
     transition: transform 0.2s;
-    border: 2px solid black;
     border-radius: 30px;
     justify-content: center;
     gap: 20px;
@@ -115,6 +113,8 @@ body {
     z-index: 9999;
     align-items: center;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     overflow: hidden;
 }
 
@@ -140,13 +140,28 @@ body {
     text-align: center;
 }
 
-.actionButtons {
+.actionButtonsDiv {
+    width: 200px;
     display: flex;
     flex-direction: column;
-    width: 90%;
-    padding: 5px;
-    gap: 8px;
     align-items: center;
+    gap: 5px;
+}
+
+.actionButtons {
+    width: 100%;
+    padding: 7px;
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+.actionButtons:hover {
+    background-color: rgb(84, 84, 84);
+}
+
+#startBtn {
+    width: 100%;
 }
 
 #nextButton {
@@ -164,7 +179,7 @@ body {
 }
 
 .hintMessage {
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
 }
 
