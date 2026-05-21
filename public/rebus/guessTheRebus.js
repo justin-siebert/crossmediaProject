@@ -119,6 +119,7 @@ let wasRevealed = false;
 let hintsLeft = 2;
 let revealsLeft = 2;
 let currentRebus = undefined;
+let revealedNow = false;
 
 hintTrackerForUser.textContent = `Hints left: ${hintsLeft}`;
 revealTrackerForUser.textContent = `Reveals left: ${revealsLeft}`;
@@ -127,8 +128,11 @@ revealTrackerForUser.textContent = `Reveals left: ${revealsLeft}`;
 
 function checkAnswer() {
 
+    console.log(wasRevealed, "ordet har avslöjats")
+
     if (revealTracker === 1) {
         revealBtn.disabled = false;
+        revealedNow = true;
     }
 
     if (phoneDiv.contains(wrongAnswerDiv)) {
@@ -159,10 +163,12 @@ function checkAnswer() {
 
         currentIndex++
 
-        if (wasRevealed) {
+        if (revealedNow) {
             getNewImages();
             checkHintAndRevealTrackers();
+            revealedNow = false;
         } else {
+
             getVictoryOverlay();
         }
 
@@ -243,6 +249,7 @@ function revealAnswer() {
     revealBtn.disabled = true;
     hintBtn.disabled = true;
     revealTracker++
+    revealedNow = true;
 
     revealsLeft--;
     revealTrackerForUser.textContent = `Reveals left: ${revealsLeft}`;
@@ -258,7 +265,6 @@ function revealAnswer() {
                 box.value = rebusArray[currentIndex].correctAnswer[index];
             }
         });
-
         guessBtn.textContent = "Next rebus";
     }
 }
@@ -362,6 +368,15 @@ function showGame() {
     getNewImages();
 }
 
+nextBtn.addEventListener("click", () => {
+    hintBtn.disabled = false;
+    revealBtn.disabled = false;
+    getNewImages();
+    removeVictoryOverlay();
+    revealedNow = false
+
+})
+
 guessBtn.addEventListener("click", () => {
     const hintSpanElementsToRemove = document.querySelectorAll(".hintMessage");
     console.log(hintSpanElementsToRemove, "span-element som ska tas bort inför nästa rebus")
@@ -383,13 +398,7 @@ startBtn.addEventListener("click", () => {
     showGame();
 })
 
-nextBtn.addEventListener("click", () => {
-    hintBtn.disabled = false;
-    revealBtn.disabled = false;
-    getNewImages();
-    removeVictoryOverlay();
 
-})
 
 rebusIntroductionPage()
 checkHintAndRevealTrackers()
