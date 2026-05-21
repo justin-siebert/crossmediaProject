@@ -33,14 +33,26 @@ if (numpad) {
             if (userChosenPin.length === 4) {
                 const isCorrect = userChosenPin.join('') === pincode.join('');
                 if (isCorrect) {
+                    // 1. Spara direkt att uppdraget är slutfört
                     localStorage.setItem("phoneTaskDone", "true");
+                    
+                    // 2. Gör en snygg visuell övergång innan sidan byts
                     setTimeout(() => {
                         const img = document.querySelector("img");
+                        
+                        // Göm undan knapparna och prickarna
                         numpad.classList.add("displayNone");
-                        if(dotContainer) dotContainer.classList.add("displayNone");
-                        if(img) img.classList.remove("displayNone");
-                    }, 200);
-                    // Här kan video-logik läggas till senare
+                        if (dotContainer) dotContainer.classList.add("displayNone");
+                        
+                        // Om du har en "upplåst" bild eller vill visa något snabbt, gör det här
+                        if (img) img.classList.remove("displayNone"); 
+                        
+                        // 3. Skicka spelaren till video-sidan efter 300 millisekunder
+                        setTimeout(() => {
+                            window.location.href = "video.html";
+                        }, 700);
+
+                    }, 500);
                 } else {
                     handleWrongPin();
                 }
