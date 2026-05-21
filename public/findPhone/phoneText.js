@@ -40,7 +40,17 @@ if (numpad) {
                         if(dotContainer) dotContainer.classList.add("displayNone");
                         if(img) img.classList.remove("displayNone");
                     }, 200);
-                    // Här kan video-logik läggas till senare
+                    localStorage.setItem("phoneTaskDone", "true");
+    
+                    setTimeout(() => {
+                        const img = document.querySelector("img");
+                        numpad.classList.add("displayNone");
+                        if(dotContainer) dotContainer.classList.add("displayNone");
+                        if(img) img.classList.remove("displayNone");
+
+                        window.location.href = "video.html"; 
+                        
+                    }, 200);
                 } else {
                     handleWrongPin();
                 }
