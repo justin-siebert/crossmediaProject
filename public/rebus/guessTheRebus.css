@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100dvh;
 }
 
 .phone {
@@ -106,6 +106,10 @@ body {
     bottom: 0;
     right: 0;
     left: 0;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    display: flex;
 }
 
 .victoryMessageDiv {
