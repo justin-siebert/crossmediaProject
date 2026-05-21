@@ -115,7 +115,6 @@ let currentIndex = 0;
 let revealTracker = 0;
 let finishedTracker = false;
 let hintTracker = 0;
-let wasRevealed = false;
 let hintsLeft = 2;
 let revealsLeft = 2;
 let currentRebus = undefined;
@@ -128,11 +127,10 @@ revealTrackerForUser.textContent = `Reveals left: ${revealsLeft}`;
 
 function checkAnswer() {
 
-    console.log(wasRevealed, "ordet har avslöjats")
+    console.log(revealedNow, "ordet har avslöjats")
 
     if (revealTracker === 1) {
         revealBtn.disabled = false;
-        revealedNow = true;
     }
 
     if (phoneDiv.contains(wrongAnswerDiv)) {
@@ -253,8 +251,6 @@ function revealAnswer() {
 
     revealsLeft--;
     revealTrackerForUser.textContent = `Reveals left: ${revealsLeft}`;
-
-    wasRevealed = true;
 
     if (revealTracker > 0) {
         const inputBoxesList = document.querySelectorAll(".inputBox");
@@ -397,8 +393,6 @@ revealBtn.addEventListener("click", () => {
 startBtn.addEventListener("click", () => {
     showGame();
 })
-
-
 
 rebusIntroductionPage()
 checkHintAndRevealTrackers()
