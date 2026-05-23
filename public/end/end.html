@@ -1,35 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="end.css">
-    <title>EndScene</title>
+    <title>Slutstrid - Bo01</title>
 </head>
 <body>
-    <div id="text">
-        <h1>Vem skjuter du?</h1>
+
+    <div id="introContainer">
+        <p class="story-text">
+            Danskarna och Bo01-ligan har samlats på platsen. De står tätt ihop och diskuterar sitt nästa drag. 
+            Aktivera din dolda mikrofon och avlyssna deras möte innan du agerar!
+        </p>
+        <p class="volume-reminder">⚠️ OBS! Se till att ha ljudet påslaget på din mobil.</p>
+        <button id="listenBtn" class="actionBtn">LYSSNA PÅ MÖTET</button>
     </div>
 
-    <div id="imgContainer">
-        <div id="selectionOne">
-            <h1>Danskarna</h1>
-            <img src="../bilder/danishBoys.png" alt="">
+    <div id="gameplayArea" class="displayNone">
+        <div id="text">
+            <h1>Vem skjuter du?</h1>
         </div>
 
-        <div id="selectionTwo">
-            <h1>Svenskarna</h1>
-            <img src="../bilder/swedishBoys.png" alt="">
-            <img src="../bilder/shoot.png" alt="">
-        </div>
-    </div>
+        <div id="imgContainer">
+            <div id="selectionOne" class="team-box">
+                <h2>Danskarna</h2>
+                <img src="../bilder/danishBoys.png" alt="Danskarna">
+            </div>
 
-    <div id="buttonContainer">
-        <button class="shootBtn" id="danish">Välj danskarna</button>
-        <button class="shootBtn" id="swedish">Välj svenskarna</button>
+            <div id="selectionTwo" class="team-box">
+                <h2>Svenskarna</h2>
+                <img src="../bilder/swedishBoys.png" alt="Svenskarna">
+                <img id="shootIcon" src="../bilder/shoot.png" alt="Sikte">
+            </div>
+        </div>
+
+        <div id="buttonContainer">
+            <button class="shootBtn" id="danish">Välj danskarna</button>
+            <button class="shootBtn" id="swedish">Välj svenskarna</button>
+        </div>
     </div>
 
     <script src="end.js"></script>
-    
 </body>
 </html>

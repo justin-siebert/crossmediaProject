@@ -1,54 +1,181 @@
 body {
-    /* Mjuk övergång för alla förändringar */
     transition: opacity 1.5s ease, filter 1.5s cubic-bezier(0.4, 0, 0.2, 1), background-color 2s;
-    background-color: white; /* Startfärg */
-    color: black;
+    background-color: #0c0c0e; /* Ändrat till mörk spion-look istället för kritvit */
+    color: #ffffff;
     margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-/* Denna klass aktiverar "ut-suddningen" */
+/* Intro-boxen */
+#introContainer {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    transition: opacity 1s ease;
+}
+
+.story-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #e5e5ea;
+    margin-bottom: 20px;
+}
+
+.volume-reminder {
+    color: #ffcc00;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Snygg smartphone-knapp */
+.actionBtn, .shootBtn {
+    background-color: #007aff;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.actionBtn:active, .shootBtn:active {
+    background-color: #0056b3;
+    transform: scale(0.98);
+}
+
+/* Spelytan som döljs under avlyssningen */
+#gameplayArea {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.displayNone {
+    display: none !important;
+}
+
 .scene-change {
     opacity: 0;
     filter: blur(20px);
 }
 
-/* Lite extra styling för Boom-texten för filmkänsla */
 .boom-text {
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 10px;
+    letter-spacing: 5px;
     text-shadow: 0 0 20px red;
+    text-align: center;
 }
 
+/* Bild-behållaren */
 #imgContainer {
     display: flex;
     flex-direction: row; 
     justify-content: center; 
     align-items: flex-start;
-    width: 90%;
-    gap: 30px; 
-    margin-top: 20px;
-}
-
-#selectionOne, #selectionTwo {
-    text-align: center;
-}
-
-#selectionOne img, #selectionTwo img {
     width: 100%;
-    max-width: 300px;
-    height: auto;    
-    border-radius: 10px;
-    margin-bottom: 20px ;
+    max-width: 600px;
+    gap: 20px; 
+    margin: 25px 0;
 }
 
-h1 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+.team-box {
+    background-color: #1c1c1e;
+    padding: 15px;
+    border-radius: 16px;
+    text-align: center;
+    flex: 1;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    position: relative;
 }
+
+.team-box h2 {
+    font-size: 1.1rem;
+    margin: 0 0 10px 0;
+    color: #aeaeb2;
+}
+
+.team-box img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+}
+
+/* Sikte-ikonen placeras snyggt */
+#shootIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    pointer-events: none; /* Gör att den inte blockerar klick */
+}
+
+#buttonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    align-items: center;
+}
+
+.shootBtn {
+    background-color: #ff3b30; /* Röd färg för skjutknapparna! */
+}
+
+.shootBtn:hover {
+    background-color: #d62217;
+}
+
+.final-message {
+    text-align: center;
+    max-width: 500px;
+    font-size: 1.4rem;
+    line-height: 1.5;
+}
+
+.death-text {
+    color: #ff3b30;
+    font-weight: bold;
+    font-size: 2rem;
+    text-shadow: 0 0 10px rgba(255, 59, 48, 0.5);
+}
+
+/* Styling för den gigantiska sluttexten */
+.the-end-text {
+    font-size: 5rem; /* Riktigt stora bokstäver */
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 15px; /* Mycket luft mellan bokstäverna för filmkänsla */
+    color: #ffffff;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+    text-align: center;
+    animation: pulse 3s infinite alternate; /* En subtil pulserande effekt */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(1.03); opacity: 1; }
+}
+
+/* Mobilanpassning för THE END-texten så den inte klipper på små skärmar */
+@media (max-width: 480px) {
+    .the-end-text {
+        font-size: 3rem;
+        letter-spacing: 8px;
+    }
+}
+
