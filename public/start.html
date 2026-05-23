@@ -5,13 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BO01_INTRO</title>
     <link rel="stylesheet" href="start.css">
+    <style>
+
+        .intro-text-box {
+            width: 100%;
+            max-width: 500px;
+            min-height: 150px;
+            margin: 20px 0 30px 0;
+            text-align: left;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #00ff41;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-left: 3px solid #00ff41;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body class="hacker-page">
 
     <div class="hacker-container">
         <h1>INTRODUKTION: BO01-LIGAN</h1>
 
-
+        <div id="introText" class="intro-text-box"></div>
 
         <button onclick="startGame()" class="hacker-btn-big">STARTA TERMINALEN</button>
     </div>
@@ -20,6 +37,42 @@
         function startGame() {
             window.location.href = "password/password.html";
         }
+
+        const introElement = document.getElementById("introText");
+        
+        const storyLines = [
+            "[SYSTEM]: Initierar agent-protokoll...",
+            "Du är en undercover-detektiv med ett kritiskt uppdrag: infiltrera den ökända Bo01-ligan innan deras nästa drag.",
+            "Ditt första uppdrag är att skaffa information. Du har lokaliserat en krypterad server tillhörande det lokala tidningsbolaget.",
+            "Deras databas innehåller en hemligstämplad och ännu ej publicerad tidningsartikel som avslöjar ligans senaste rörelser.",
+            "Bryt dig in på kontot för att ladda ner filen. Ligan håller ögonen på dig. Lycka till."
+        ];
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function typeOutIntro() {
+            for (let i = 0; i < storyLines.length; i++) {
+                const lineDiv = document.createElement("div");
+                // Lägg till lite extra luft eller stil på första system-raden
+                if (i === 0) lineDiv.style.color = "#888"; 
+                lineDiv.style.marginBottom = "12px";
+                introElement.appendChild(lineDiv);
+
+                for (const letter of storyLines[i]) {
+                    lineDiv.textContent += letter;
+                    // Lite snabbare takt (20ms) eftersom texten är lite längre
+                    await sleep(20); 
+                }
+                
+                await sleep(500); 
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            typeOutIntro();
+        });
     </script>
 </body>
 </html>

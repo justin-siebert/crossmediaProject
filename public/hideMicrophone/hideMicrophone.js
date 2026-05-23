@@ -49,7 +49,7 @@ function visaKoordinater(meddelandeText) {
     successText.appendChild(br);
     
     const coordSpan = document.createElement("span");
-    coordSpan.innerHTML = '<a href="https://share.google/0UBij1seXQwrz3NWy" target="_blank" style="color: #34c759; text-decoration: none;">Ta dig till 55.610636, 12.974856</a>';
+    coordSpan.innerHTML = '<a href="https://maps.app.goo.gl/46mmPrZjAQyGU57w5" target="_blank" style="color: #34c759; text-decoration: none;">Ta dig till 55.610636, 12.974856</a>';
     coordSpan.style.fontWeight = "bold";
     coordSpan.style.display = "block";
     coordSpan.style.marginTop = "10px";

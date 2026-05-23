@@ -237,7 +237,7 @@ function getFinishedPage() {
         phoneDiv.appendChild(repeatConversationBtn);
 
         img.remove();
-        excitedMessage.textContent = "Ta dig till Soliga kvarteret nu på en gång, 55.611321, 12.973578! "
+        excitedMessage.textContent = "Ta dig till Soliga kvarteret nu på en gång, 55.611169, 12.973565! "
 
         repeatConversationBtn.addEventListener("click", () => {
             getFinishedPage();

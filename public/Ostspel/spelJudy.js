@@ -47,7 +47,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 localStorage.setItem("cheeseTaskDone", "true");
                 
-                slutText.textContent = "Snyggt jobbat! Du klarade det!";
+                slutText.innerHTML = "Snyggt jobbat! Du klarade det!<br><br>" +
+                                     "<i>\"Tack för att du hämtade bluecheese åt mig. " +
+                                     "Kan du göra mig en tjänst och slå Agneta 57 i rebusen? Hon låter inte mig vara.\"</i>";
                 spelSlut.classList.remove("displayNone");
                 goraOmBtn.textContent = "Gå tillbaka till uppdragen";
                 goraOmBtn.onclick = function() {
