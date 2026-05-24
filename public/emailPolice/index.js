@@ -5,18 +5,18 @@ const textArea = document.querySelector("textArea");
 const signs = [".", ",", "!", "?", "+", "-", ";", ":"]
 const checkLength = []
 async function sendEmail() {
-    if(!textArea.value){
+    if (!textArea.value) {
         alert("Fält får inte lämnas tom")
         return
     }
 
-    for (let x of textArea.value.split(" ")){
-        if(!signs.includes(x)){
+    for (let x of textArea.value.split(" ")) {
+        if (!signs.includes(x)) {
             checkLength.push(x)
         }
     }
 
-    if(checkLength.length < 10){
+    if (checkLength.length < 10) {
         alert("Skriv minst 10 ord")
         return
     } else {
@@ -31,7 +31,7 @@ async function sendEmail() {
         // När mejlet har "skickats" (t.ex. vid klick på skicka-knappen)
         localStorage.setItem("emailTaskDone", "true");
 
-        setTimeout(()=>{
+        setTimeout(() => {
             window.location.href = "../index.html";
         }, 500)
     }
@@ -49,7 +49,7 @@ function sleep(ms) {
 async function typeOutSlowly(words) {
     const div = document.createElement("div");
     textContainer.appendChild(div);
-    div.style.whiteSpace = "pre-wrap"; 
+    div.style.whiteSpace = "pre-wrap";
 
     for (const word of words) {
         for (const letter of word) {
@@ -71,8 +71,8 @@ async function typeOutSlowly(words) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", async(event) => {
-    await typeOutSlowly(text.split(" "))   
+document.addEventListener("DOMContentLoaded", async (event) => {
+    await typeOutSlowly(text.split(" "))
 })
 
-let text = "Rapportera läget tillbaka till din chef. Skriv ett mejl om vad du såg."
+let text = "Rapportera läget tillbaka till din chef. Skriv ett mejl om vad du fick reda på genom avlyssningen."
