@@ -18,11 +18,11 @@ listenBtn.style.marginTop = "15px";
 // NYTT: Skapa en påminnelsetext om att slå på ljudet
 const volumeReminder = document.createElement("p");
 volumeReminder.classList.add("textStyling");
-volumeReminder.style.color = "#ffcc00"; // Gul/Orange färg för att varna/påminna
+volumeReminder.style.color = "#ffc506"; // Gul/Orange färg för att varna/påminna
 volumeReminder.style.fontSize = "0.9rem";
 volumeReminder.textContent = "⚠️ OBS! Se till att ha ljudet påslaget på din mobil.";
 
-const audioTrack = new Audio("../ljud/overhearMeeting.mp3"); 
+const audioTrack = new Audio("../ljud/overhearMeeting.mp3");
 
 // Kontrollera status när sidan laddas
 document.addEventListener("DOMContentLoaded", () => {
@@ -37,9 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Om uppdraget redan är klart sedan tidigare
 function visaKlarStadie() {
-    microphone.classList.add("moveIntoStone"); 
+    microphone.classList.add("moveIntoStone");
     visaKoordinater("Du har redan gömt mikrofonen. Koordinaterna är:");
-    phoneDiv.appendChild(backBtn); 
+    phoneDiv.appendChild(backBtn);
 }
 
 // Hjälpfunktion för att generera texten och Google Maps-länken
@@ -47,14 +47,14 @@ function visaKoordinater(meddelandeText) {
     successText.classList.add("textStyling");
     successText.textContent = meddelandeText;
     successText.appendChild(br);
-    
+
     const coordSpan = document.createElement("span");
-    coordSpan.innerHTML = '<a href="https://maps.app.goo.gl/46mmPrZjAQyGU57w5" target="_blank" style="color: #34c759; text-decoration: none;">Ta dig till 55.610636, 12.974856</a>';
+    coordSpan.innerHTML = '<a href="https://maps.app.goo.gl/46mmPrZjAQyGU57w5" target="_blank" style="color: #ff4000;; text-decoration: none;">Ta dig till 55.610636, 12.974856</a>';
     coordSpan.style.fontWeight = "bold";
     coordSpan.style.display = "block";
     coordSpan.style.marginTop = "10px";
     successText.appendChild(coordSpan);
-    
+
     phoneDiv.prepend(successText);
 }
 
@@ -69,7 +69,7 @@ microphone.addEventListener("click", () => {
     setTimeout(() => {
         successText.classList.add("textStyling");
         successText.textContent = "Mikrofonen är säkrad i stenen. Avlyssningskanalen är redo.";
-        
+
         phoneDiv.prepend(successText);
         phoneDiv.appendChild(volumeReminder); // Lägg till "Ha ljudet igång"
         phoneDiv.appendChild(listenBtn);     // Lägg till "LYSSNA PÅ SAMTALET"
@@ -92,7 +92,7 @@ listenBtn.addEventListener("click", () => {
 // 3. När ljudklippet har spelat klart
 audioTrack.addEventListener("ended", () => {
     listenBtn.remove(); // Ta bort avlyssningsknappen
-    
+
     setTimeout(() => {
         visaKoordinater("Avlyssningen klar! Ljudfilen har krypterats och laddats upp. Här är nästa koordinater:");
         phoneDiv.appendChild(backBtn); // Visa rapportknappen till chefen

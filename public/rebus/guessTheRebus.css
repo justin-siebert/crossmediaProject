@@ -8,6 +8,12 @@ body {
     box-sizing: border-box;
 }
 
+.backgroundColorChangeToGreen {
+    background-color: rgb(52, 43, 223);
+    color: rgb(225, 255, 0);
+    font-weight: bolder;
+}
+
 .gameContainer {
     display: flex;
     justify-content: center;
@@ -84,6 +90,7 @@ body {
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
+    gap: 2px;
 
 }
 

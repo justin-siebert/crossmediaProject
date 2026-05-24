@@ -179,6 +179,9 @@ function checkAnswer() {
 }
 
 function getFinishedPage() {
+
+    body.classList.add("backgroundColorChangeToGreen");
+
     phoneDiv.innerHTML = "";
     img.classList.add("blinking_mogelost");
 
@@ -394,7 +397,9 @@ function getAgnetaMessage() {
 }
 
 function rebusIntroductionPage() {
-    introText.textContent = "Det är totalt 7 rundor som du behöver göra klart innan Agneta57 för att gå om henne i rankningen och bli rebusmästare! Du har två reveals och två hintar till hjälp. Lycka till!";
+
+    body.classList.add("backgroundColorChangeToGreen");
+    introText.innerHTML = "Det är totalt 7 rundor som du behöver göra klart innan Agneta57 för att gå om henne i rankningen och bli rebusmästare! Du har två reveals och två hintar till hjälp. Lycka till!<br><br>OBS! Alla rebusar är på engelska!";
 
     gamingArea.classList.remove("active");
     phoneDiv.insertBefore(introText, actionsButtonsDiv);
@@ -447,6 +452,7 @@ revealBtn.addEventListener("click", () => {
 
 startBtn.addEventListener("click", () => {
     showGame();
+    body.classList.remove("backgroundColorChangeToGreen");
 })
 
 rebusIntroductionPage()

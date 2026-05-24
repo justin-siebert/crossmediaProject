@@ -1,4 +1,7 @@
 body {
+    background-color: rgb(52, 43, 223);
+    color: rgb(225, 255, 0);
+    font-weight: bolder;
     width: 100%;
     max-width: 100%;
     margin: 0px;
@@ -26,7 +29,6 @@ body {
     align-items: center;
     font-size: 10px;
     transition: transform 0.2s;
-    border: 2px solid black;
     border-radius: 30px;
     justify-content: center;
     gap: 20px;
