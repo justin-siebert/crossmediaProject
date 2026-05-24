@@ -131,6 +131,7 @@ body {
     top: 10%;
     transform: none;
     position: static;
+    margin: 40px;
 }
 
 .victoryMessageText {
@@ -145,11 +146,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
 
 .actionButtons {
-    width: 100%;
+    width: 200px;
     padding: 7px;
     background-color: black;
     color: white;
